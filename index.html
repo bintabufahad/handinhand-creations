@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shark Tank Club • Radwa International School</title>
+    <title>HandinHand Creation • Radwa International School</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">
     <!-- EmailJS Library -->
@@ -692,7 +692,17 @@
             margin: 2rem 4% 0;
         }
 
-        /* Responsive */
+        /* Responsive Design for All Displays */
+        @media (max-width: 1024px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 1.2rem;
+            }
+            .product-img {
+                height: 220px;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -710,10 +720,11 @@
             .hero {
                 flex-direction: column;
                 text-align: center;
+                padding: 2rem 4%;
             }
             .product-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 0.8rem;
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
             }
             .product-img {
                 height: 180px;
@@ -747,11 +758,16 @@
                 left: 10px;
                 max-width: none;
             }
+            .booking-modal {
+                width: 95%;
+                padding: 20px;
+            }
         }
 
         @media (max-width: 480px) {
             .product-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
             }
             .product-img {
                 height: 150px;
@@ -761,6 +777,76 @@
             }
             .section-title {
                 font-size: 1.2rem;
+                padding: 1.5rem 4% 0.8rem;
+            }
+            .btn-add {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            .cart-sidebar {
+                width: 100%;
+            }
+            .selection-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .selection-img-preview {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Tablet Portrait (768px - 1024px) */
+        @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+            .product-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .hero {
+                gap: 1.5rem;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Smartboard / Large Screens */
+        @media (min-width: 1400px) {
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 2.5rem;
+                padding: 0 6% 3rem;
+            }
+            .hero {
+                padding: 4rem 6%;
+            }
+            .section-title {
+                padding: 3rem 6% 1.5rem;
+                font-size: 2rem;
+            }
+            .product-img {
+                height: 320px;
+            }
+            .navbar {
+                padding: 1.5rem 6%;
+            }
+            .about-section {
+                margin: 3rem 6%;
+                padding: 4rem;
+            }
+        }
+
+        /* Extra Large Screens */
+        @media (min-width: 1920px) {
+            body {
+                max-width: 1920px;
+                margin: 0 auto;
+            }
+            .product-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+            }
+            .hero h1 {
+                font-size: 4rem;
             }
         }
     </style>
@@ -860,7 +946,7 @@
 
     <!-- Navigation -->
     <nav class="navbar">
-        <div class="logo">Shark Tank <span>Club</span></div>
+        <div class="logo">HandinHand <span>Creation</span></div>
         <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
         <div class="nav-links" id="navLinks">
             <a onclick="scrollToSection('hero')">Home</a>
@@ -989,7 +1075,7 @@
             </div>
         </div>
 
-        <!-- Product 7: Custom Mobile Cover - SAR 25 (same style as others) -->
+        <!-- Product 7: Custom Mobile Cover - SAR 25 -->
         <div class="product-card" data-product="mobile" data-price="25">
             <div class="product-img" onclick="zoomImage('mobile-matte')">
                 <img src="images/mobile-matte.jpg" alt="Custom Mobile Cover"
@@ -1008,11 +1094,11 @@
         </div>
     </div>
 
-    <!-- About Us Section (MOVED TO BOTTOM) -->
+    <!-- About Us Section -->
     <div class="about-section" id="about">
         <h2>About Us 🦈</h2>
         <p>
-            Shark Tank is a club of <strong>Radwa International School</strong>, which is involved in business 
+            HandinHand Creation is a club of <strong>Radwa International School</strong>, which is involved in business 
             to enhance the creativity of children and to turn the young minds into entrepreneurship. 
             Our students design and handcraft every piece with love and dedication. From crochet accessories 
             to custom mobile covers, each product represents the entrepreneurial spirit we nurture. 
@@ -1022,7 +1108,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        <p>© 2024 Shark Tank Club • Radwa International School</p>
+        <p>© 2024 HandinHand Creation • Radwa International School</p>
         <p style="margin-top:5px;">Handmade with ❤️ by young entrepreneurs</p>
     </div>
 
@@ -1135,9 +1221,9 @@
         let selectedColor = null;
         let selectedDesign = null;
         let currentQty = 1;
-        let cart = JSON.parse(localStorage.getItem('sharkTankCart')) || [];
-        let notifications = JSON.parse(localStorage.getItem('sharkTankNotifications')) || [];
-        let outOfStockItems = JSON.parse(localStorage.getItem('sharkTankOutOfStock')) || [];
+        let cart = JSON.parse(localStorage.getItem('handinhandCart')) || [];
+        let notifications = JSON.parse(localStorage.getItem('handinhandNotifications')) || [];
+        let outOfStockItems = JSON.parse(localStorage.getItem('handinhandOutOfStock')) || [];
 
         // ============ IMAGE ZOOM ============
         function zoomImage(imageName) {
@@ -1264,7 +1350,7 @@
         // ============ CART ============
         function addToCart(name, price, imgPath) {
             cart.push({ name, price, id: Date.now() + Math.random(), img: imgPath });
-            localStorage.setItem('sharkTankCart', JSON.stringify(cart));
+            localStorage.setItem('handinhandCart', JSON.stringify(cart));
             updateCartUI();
         }
 
@@ -1308,7 +1394,7 @@
 
         function removeFromCart(index) {
             cart.splice(index, 1);
-            localStorage.setItem('sharkTankCart', JSON.stringify(cart));
+            localStorage.setItem('handinhandCart', JSON.stringify(cart));
             updateCartUI();
         }
 
@@ -1357,13 +1443,13 @@
                 items: cart.map(item => `${item.name} - SAR ${item.price}`).join(', '),
                 total: `SAR ${cart.reduce((sum, item) => sum + item.price, 0)}`,
                 orderDate: new Date().toLocaleString(),
-                orderNumber: 'STC-' + Date.now().toString(36).toUpperCase()
+                orderNumber: 'HIH-' + Date.now().toString(36).toUpperCase()
             };
             
             // Save booking to localStorage (persistent record)
-            const allBookings = JSON.parse(localStorage.getItem('sharkTankBookings')) || [];
+            const allBookings = JSON.parse(localStorage.getItem('handinhandBookings')) || [];
             allBookings.push(bookingData);
-            localStorage.setItem('sharkTankBookings', JSON.stringify(allBookings));
+            localStorage.setItem('handinhandBookings', JSON.stringify(allBookings));
             
             // Add persistent notification
             addPersistentNotification(
@@ -1378,7 +1464,7 @@
             
             // Clear cart
             cart = [];
-            localStorage.setItem('sharkTankCart', JSON.stringify(cart));
+            localStorage.setItem('handinhandCart', JSON.stringify(cart));
             updateCartUI();
             
             // Show confirmation
@@ -1426,7 +1512,7 @@
             };
             
             notifications.unshift(notification);
-            localStorage.setItem('sharkTankNotifications', JSON.stringify(notifications));
+            localStorage.setItem('handinhandNotifications', JSON.stringify(notifications));
             renderNotifications();
         }
 
@@ -1463,7 +1549,7 @@
             const notif = notifications.find(n => n.id == id);
             if (notif && !notif.read) {
                 notif.read = true;
-                localStorage.setItem('sharkTankNotifications', JSON.stringify(notifications));
+                localStorage.setItem('handinhandNotifications', JSON.stringify(notifications));
                 renderNotifications();
             }
             if (notif && notif.data) {
@@ -1473,7 +1559,7 @@
 
         function dismissNotification(id) {
             notifications = notifications.filter(n => n.id != id);
-            localStorage.setItem('sharkTankNotifications', JSON.stringify(notifications));
+            localStorage.setItem('handinhandNotifications', JSON.stringify(notifications));
             renderNotifications();
         }
 
@@ -1516,7 +1602,7 @@
         // ============ ADMIN FUNCTIONS (For website owner) ============
         // View all bookings in console
         window.viewAllBookings = function() {
-            const bookings = JSON.parse(localStorage.getItem('sharkTankBookings')) || [];
+            const bookings = JSON.parse(localStorage.getItem('handinhandBookings')) || [];
             console.table(bookings);
             return bookings;
         };
@@ -1525,7 +1611,7 @@
         window.setOutOfStock = function(productType) {
             if (!outOfStockItems.includes(productType)) {
                 outOfStockItems.push(productType);
-                localStorage.setItem('sharkTankOutOfStock', JSON.stringify(outOfStockItems));
+                localStorage.setItem('handinhandOutOfStock', JSON.stringify(outOfStockItems));
                 addPersistentNotification('out-of-stock', 'Out of Stock', `${productType} marked as out of stock`, null);
                 updateOutOfStockUI();
             }
@@ -1534,7 +1620,7 @@
         // Mark item as back in stock
         window.setInStock = function(productType) {
             outOfStockItems = outOfStockItems.filter(p => p !== productType);
-            localStorage.setItem('sharkTankOutOfStock', JSON.stringify(outOfStockItems));
+            localStorage.setItem('handinhandOutOfStock', JSON.stringify(outOfStockItems));
             updateOutOfStockUI();
         };
         
@@ -1564,7 +1650,7 @@
             updateOutOfStockUI();
             
             // Show instructions for owner
-            console.log('🦈 Shark Tank Club - Admin Console');
+            console.log('🤝 HandinHand Creation - Admin Console');
             console.log('📋 viewAllBookings() - See all bookings');
             console.log('📦 setOutOfStock("bracelet") - Mark item out of stock');
             console.log('✅ setInStock("bracelet") - Mark item back in stock');
